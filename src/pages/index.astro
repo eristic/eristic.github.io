@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Get all blog posts and sort them by date
+const posts = await Astro.glob('./blog/*.md');
+const sortedPosts = posts.sort((a, b) => 
+	new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+);
+// Get the latest 3 posts
+const latestPosts = sortedPosts.slice(0, 3);
 ---
 
 <Layout title="Home | My Blog">
@@ -10,7 +18,31 @@ import Layout from '../layouts/Layout.astro';
 
 	<section class="featured">
 		<h2>Latest Posts</h2>
-		<!-- We'll add dynamic blog posts here later -->
+		<div class="post-grid">
+			{latestPosts.map(post => (
+				<article class="post-card">
+					<h3>
+						<a href={post.url}>{post.frontmatter.title}</a>
+					</h3>
+					<div class="post-metadata">
+						<time datetime={new Date(post.frontmatter.pubDate).toISOString()}>
+							{new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})}
+						</time>
+					</div>
+					{post.frontmatter.description && (
+						<p class="description">{post.frontmatter.description}</p>
+					)}
+					<a href={post.url} class="read-more">Read More →</a>
+				</article>
+			))}
+		</div>
+		<div class="view-all">
+			<a href="/blog" class="view-all-link">View All Posts →</a>
+		</div>
 	</section>
 </Layout>
 
@@ -38,5 +70,81 @@ import Layout from '../layouts/Layout.astro';
 	.featured h2 {
 		font-size: 1.8rem;
 		margin-bottom: 2rem;
+	}
+
+	.post-grid {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		margin-bottom: 3rem;
+	}
+
+	.post-card {
+		padding: 1.5rem;
+		border: 1px solid #eee;
+		border-radius: 8px;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.post-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	.post-card h3 {
+		font-size: 1.4rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.post-card h3 a {
+		color: var(--text-color);
+		text-decoration: none;
+	}
+
+	.post-card h3 a:hover {
+		color: var(--accent-color);
+	}
+
+	.post-metadata {
+		font-size: 0.9rem;
+		color: #666;
+		margin-bottom: 1rem;
+	}
+
+	.description {
+		color: #444;
+		margin-bottom: 1.5rem;
+		line-height: 1.5;
+	}
+
+	.read-more {
+		display: inline-block;
+		color: var(--accent-color);
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.read-more:hover {
+		text-decoration: underline;
+	}
+
+	.view-all {
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.view-all-link {
+		display: inline-block;
+		padding: 0.8rem 1.5rem;
+		background-color: var(--accent-color);
+		color: white;
+		text-decoration: none;
+		border-radius: 4px;
+		font-weight: 500;
+		transition: background-color 0.2s ease;
+	}
+
+	.view-all-link:hover {
+		background-color: #2980b9;
 	}
 </style>
