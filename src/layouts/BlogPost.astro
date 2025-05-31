@@ -16,13 +16,15 @@ const { title, description, pubDate, author = "Your Name" } = Astro.props;
     <header>
       <h1>{title}</h1>
       <div class="metadata">
-        <time datetime={pubDate.toISOString()}>
-          {pubDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
+        {pubDate && (
+          <time datetime={pubDate.toISOString()}>
+            {pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+        )}
         <span class="author">by {author}</span>
       </div>
     </header>
