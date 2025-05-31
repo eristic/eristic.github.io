@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 
 // Get all blog posts and sort them by date
-const posts = await Astro.glob('./blog/*.md');
+const posts = await Astro.glob('./post/*.md');
 const sortedPosts = posts.sort((a, b) => 
 	new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
 );
@@ -12,46 +12,59 @@ const latestPosts = sortedPosts.slice(0, 3);
 
 <Layout title="Home | My Blog">
 	<section class="hero">
-		<h1>Some thoughts from Scott</h1>
-		<p>A space for thoughts, ideas, and discoveries.</p>
+		<div class="container">
+			<h1>Thoughts from Scott</h1>
+			<p>A place where creativity and technology play and sometimes fight.</p>
+		</div>
 	</section>
 
+	<div class="container">
 	<section class="featured">
 		<h2>Latest Posts</h2>
 		<div class="post-grid">
 			{latestPosts.map(post => (
 				<article class="post-card">
-					<h3>
-						<a href={post.url}>{post.frontmatter.title}</a>
-					</h3>
-					<div class="post-metadata">
-						{post.frontmatter.pubDate && (
-							<time datetime={new Date(post.frontmatter.pubDate).toISOString()}>
-								{new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
-									year: 'numeric',
-									month: 'long',
-									day: 'numeric'
-								})}
-							</time>
+					<div class="post-card-content">
+						<h3>
+							<a href={post.url}>{post.frontmatter.title}</a>
+						</h3>
+						<div class="post-metadata">
+							{post.frontmatter.pubDate && (
+								<time datetime={new Date(post.frontmatter.pubDate).toISOString()}>
+									{new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric'
+									})}
+								</time>
+							)}
+						</div>
+						{post.frontmatter.description && (
+							<p class="description">{post.frontmatter.description}</p>
 						)}
 					</div>
-					{post.frontmatter.description && (
-						<p class="description">{post.frontmatter.description}</p>
-					)}
-					<a href={post.url} class="read-more">Read More</a>
+					<div class="read-more">	
+						<a href={post.url} class="read-more">Read More</a>
+					</div>
 				</article>
 			))}
 		</div>
 		<div class="view-all">
-			<a href="/blog" class="view-all-link">View All Posts</a>
+			<a href="/post" class="view-all-link">View All Posts</a>
 		</div>
 	</section>
+</div>
 </Layout>
 
 <style>
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
 	@property --myColor1 {
 		syntax: '<color>';
-		initial-value: rgba(223, 236, 255, 1);
+		initial-value: rgba(241, 241, 242, 1);
 		inherits: false;
 	}
 
@@ -68,13 +81,40 @@ const latestPosts = sortedPosts.slice(0, 3);
 	}
 
 	h1 {
-		color: white;
+		color: black;
+	}
+
+	.hero {
+		background-color: #e3dfdf;
+		border-bottom: 5px solid #000;
+	}
+
+	.hero p {
+		margin: 0;
+	}
+
+	.hero h1 {
+		margin: 0;
 	}
 
 	p, time, a {
 		font-family: 'Montserrat Variable', sans-serif;
 		font-weight: 400;
 		font-variation-settings: 'wght' 500;
+	}
+
+	h2 {
+		color: #DFECFF;
+		font-size: 2rem;
+		font-weight: 900;
+		font-variation-settings: 'wght' 900;
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
+
+	h3 {
+		margin-bottom: 0;
+		margin-top: 0;
 	}
 
 	h3 a {
@@ -84,39 +124,49 @@ const latestPosts = sortedPosts.slice(0, 3);
 		text-decoration: none;
 		color: #1b1928;
 		font-size: 2rem;
+		line-height: 1;
+		
 	}
 
 	article.post-card {
-		padding: 2rem;
+		display: grid;
+		grid-auto-rows: minmax(min-content, max-content);
+		grid-template-columns: auto 1fr;
+		padding: 1.5rem 0 1.5rem 1.5rem;
 		background-color: #e3dfdf;
 		margin-bottom: 2rem;
 		position: relative;
 		background: #DFECFF;
-		border-radius: 30px;
+		border-radius: 15px;
 		background: linear-gradient(90deg, var(--myColor1) 0%, var(--myColor2) 100%);
 		transition: --myColor1 1s, --myColor2 1s, border-radius 1s;
 		&:hover {
-			--myColor1: rgba(91, 124, 153, 1);
-			--myColor2: rgba(223, 236, 255, 1);
+			--myColor1: #e3dfdf;
+			--myColor2: #e3dfdf;
 			border-radius: 0;
 		}
 		
 	}
 
 	.read-more {
-		transform: rotate(-90deg);
-		display: inline-block;
-		transform-origin: right center;
+		transform: rotate(180deg);
+		writing-mode: vertical-lr;
+		text-align: center;
 		font-size: 1.2rem;
 		font-family: 'Montserrat Variable', sans-serif;
 		font-weight: 900;
 		font-variation-settings: 'wght' 900;
 		text-decoration: none;
 		color: #1b1928;
-		position: absolute;
-		right: 30px;
-		top: 21%;
 	}
 
+	.view-all {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		a {
+			color: #DFECFF;
+			text-decoration: none;
+		}
+	}
 	
 </style>

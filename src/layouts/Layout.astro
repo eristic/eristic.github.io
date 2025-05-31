@@ -20,12 +20,14 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div class="container">
+    
       <header>
-        <nav>
-          <a href="/">Latest posts</a>
-          <a href="/blog">All posts</a>
-        </nav>
+        <div class="container">
+          <nav>
+            <a href="/">Latest posts</a>
+            <a href="/post">All posts</a>
+          </nav>
+        </div>
       </header>
       <main>
         <slot />
@@ -56,13 +58,12 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     color: var(--text-color);
     background-color: var(--background-color);
     line-height: 1.6;
-    /* font-family: 'Merriweather Variable', serif; */
   }
 
   .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 1rem 0;
   }
 
   header {
@@ -75,10 +76,11 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
   }
 
   nav a {
-    color: #fff;
+    color: #DFECFF;
+		font-size: 1rem;
+		font-weight: 900;
+		font-variation-settings: 'wght' 900;
     text-decoration: none;
-    font-weight: 500;
-    font-family: 'Montserrat Variable', sans-serif;
   }
 
   nav a:hover {
