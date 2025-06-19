@@ -13,7 +13,7 @@ const latestPosts = sortedPosts.slice(0, 3);
 <Layout title="Home | My Blog">
 	<section class="hero">
 		<div class="container">
-			<h1>Thoughts from Scott</h1>
+			<h1>Scott Thoughts</h1>
 			<p>A place where creativity and technology play and sometimes fight.</p>
 		</div>
 	</section>
@@ -62,6 +62,7 @@ const latestPosts = sortedPosts.slice(0, 3);
 		margin: 0 auto;
 		padding: 0 1rem;
 	}
+
 	@property --myColor1 {
 		syntax: '<color>';
 		initial-value: rgba(241, 241, 242, 1);
@@ -81,16 +82,20 @@ const latestPosts = sortedPosts.slice(0, 3);
 	}
 
 	h1 {
-		color: black;
+		color: var(--post-title-color);
+		transition: color 0.3s ease;
 	}
 
 	.hero {
-		background-color: #e3dfdf;
-		border-bottom: 5px solid #000;
+		background-color: var(--hero-bg-color);
+		border-bottom: 5px solid var(--hero-border-color);
+		transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
 
 	.hero p {
 		margin: 0;
+		color: var(--post-description-color);
+		transition: color 0.3s ease;
 	}
 
 	.hero h1 {
@@ -104,12 +109,13 @@ const latestPosts = sortedPosts.slice(0, 3);
 	}
 
 	h2 {
-		color: #DFECFF;
+		color: var(--section-heading-color);
 		font-size: 2rem;
 		font-weight: 900;
 		font-variation-settings: 'wght' 900;
 		margin-bottom: 1rem;
 		margin-top: 1rem;
+		transition: color 0.3s ease;
 	}
 
 	h3 {
@@ -122,10 +128,20 @@ const latestPosts = sortedPosts.slice(0, 3);
 		font-weight: 900;
 		font-variation-settings: 'wght' 700;
 		text-decoration: none;
-		color: #1b1928;
+		color: var(--post-title-color);
 		font-size: 2rem;
 		line-height: 1;
-		
+		transition: color 0.3s ease;
+	}
+
+	.post-metadata time {
+		color: var(--post-meta-color);
+		transition: color 0.3s ease;
+	}
+
+	.description {
+		color: var(--post-description-color);
+		transition: color 0.3s ease;
 	}
 
 	article.post-card {
@@ -133,19 +149,26 @@ const latestPosts = sortedPosts.slice(0, 3);
 		grid-auto-rows: minmax(min-content, max-content);
 		grid-template-columns: auto 1fr;
 		padding: 1.5rem 0 1.5rem 1.5rem;
-		background-color: #e3dfdf;
 		margin-bottom: 2rem;
 		position: relative;
-		background: #DFECFF;
+		background: var(--post-card-bg);
 		border-radius: 15px;
-		background: linear-gradient(90deg, var(--myColor1) 0%, var(--myColor2) 100%);
-		transition: --myColor1 1s, --myColor2 1s, border-radius 1s;
-		&:hover {
-			--myColor1: #e3dfdf;
-			--myColor2: #e3dfdf;
-			border-radius: 0;
-		}
-		
+		transition: background 0.3s ease, border-radius 1s, --myColor1 1s, --myColor2 1s;
+	}
+
+	[data-theme="light"] article.post-card {
+		--myColor1: rgba(241, 241, 242, 1);
+		--myColor2: rgba(91, 124, 153, 1);
+	}
+
+	[data-theme="dark"] article.post-card {
+		--myColor1: rgba(45, 55, 72, 1);
+		--myColor2: rgba(26, 32, 44, 1);
+	}
+
+	article.post-card:hover {
+		background: var(--post-card-hover-bg);
+		border-radius: 0;
 	}
 
 	.read-more {
@@ -157,16 +180,23 @@ const latestPosts = sortedPosts.slice(0, 3);
 		font-weight: 900;
 		font-variation-settings: 'wght' 900;
 		text-decoration: none;
-		color: #1b1928;
+		color: var(--post-title-color);
+		padding-right: 70px;
+		transition: color 0.3s ease;
 	}
 
 	.view-all {
 		margin-top: 2rem;
 		margin-bottom: 2rem;
-		a {
-			color: #DFECFF;
-			text-decoration: none;
-		}
 	}
-	
+
+	.view-all a {
+		color: var(--view-all-color);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.view-all a:hover {
+		color: var(--accent-color);
+	}
 </style>

@@ -20,13 +20,17 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    
+    <div class="site-wrapper">
       <header>
         <div class="container">
           <nav>
             <a href="/">Latest posts</a>
             <a href="/post">All posts</a>
           </nav>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+          </button>
         </div>
       </header>
       <main>
@@ -36,6 +40,72 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
         <p>&copy; {new Date().getFullYear()} Your Name. All rights reserved.</p>
       </footer>
     </div>
+
+    <!-- Astro-specific script for theme management -->
+    <script is:inline>
+      // Prevent flash of unstyled content (FOUC) by setting theme before page renders
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      })();
+    </script>
+
+    <script>
+      // Theme toggle functionality - Astro-optimized
+      function initThemeToggle() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        if (!themeToggle) return;
+
+        // Update toggle button state
+        function updateToggleButton(theme: string) {
+          const sunIcon = themeToggle!.querySelector('.sun-icon');
+          const moonIcon = themeToggle!.querySelector('.moon-icon');
+          
+          if (sunIcon && moonIcon) {
+            if (theme === 'dark') {
+              (sunIcon as HTMLElement).style.opacity = '1';
+              (moonIcon as HTMLElement).style.opacity = '0';
+            } else {
+              (sunIcon as HTMLElement).style.opacity = '0';
+              (moonIcon as HTMLElement).style.opacity = '1';
+            }
+          }
+        }
+
+        // Handle theme toggle
+        function handleToggle() {
+          const currentTheme = html.getAttribute('data-theme');
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          
+          // Update DOM and localStorage
+          html.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          // Update button state
+          updateToggleButton(newTheme);
+          
+          // Dispatch custom event for other components that might need to know
+          window.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: newTheme } 
+          }));
+        }
+
+        // Initialize button state
+        const currentTheme = html.getAttribute('data-theme') || 'light';
+        updateToggleButton(currentTheme);
+        
+        // Add event listener
+        themeToggle.addEventListener('click', handleToggle);
+      }
+
+      // Initialize theme toggle when DOM is ready
+      document.addEventListener('DOMContentLoaded', initThemeToggle);
+
+      // Also handle page transitions (for Astro view transitions)
+      document.addEventListener('astro:page-load', initThemeToggle);
+    </script>
   </body>
 </html>
 
@@ -43,9 +113,42 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
   :root {
     --font-family-body: 'Merriweather Variable', serif;
     --font-family-heading: 'Montserrat Variable', sans-serif;
+  }
+
+  /* Light theme (default) */
+  [data-theme="light"] {
     --text-color: #2c3e50;
     --background-color: #5b7c99;
     --accent-color: #3498db;
+    --nav-text-color: #DFECFF;
+    --footer-text-color: #666;
+    --hero-bg-color: #e3dfdf;
+    --hero-border-color: #000;
+    --post-card-bg: linear-gradient(90deg, rgba(241, 241, 242, 1) 0%, rgba(91, 124, 153, 1) 100%);
+    --post-card-hover-bg: #e3dfdf;
+    --post-title-color: #1b1928;
+    --post-description-color: #1b1928;
+    --post-meta-color: #1b1928;
+    --section-heading-color: #DFECFF;
+    --view-all-color: #DFECFF;
+  }
+
+  /* Dark theme */
+  [data-theme="dark"] {
+    --text-color: #e2e8f0;
+    --background-color: #1a202c;
+    --accent-color: #60a5fa;
+    --nav-text-color: #cbd5e0;
+    --footer-text-color: #a0aec0;
+    --hero-bg-color: #2d3748;
+    --hero-border-color: #4a5568;
+    --post-card-bg: linear-gradient(90deg, rgba(45, 55, 72, 1) 0%, rgba(26, 32, 44, 1) 100%);
+    --post-card-hover-bg: #374151;
+    --post-title-color: #f7fafc;
+    --post-description-color: #e2e8f0;
+    --post-meta-color: #cbd5e0;
+    --section-heading-color: #90cdf4;
+    --view-all-color: #90cdf4;
   }
 
   * {
@@ -58,12 +161,22 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     color: var(--text-color);
     background-color: var(--background-color);
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   header {
@@ -76,32 +189,62 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
   }
 
   nav a {
-    color: #DFECFF;
-		font-size: 1rem;
-		font-weight: 900;
-		font-variation-settings: 'wght' 900;
+    color: var(--nav-text-color);
+    font-size: 1rem;
+    font-weight: 900;
+    font-variation-settings: 'wght' 900;
     text-decoration: none;
+    transition: color 0.3s ease;
   }
 
   nav a:hover {
     color: var(--accent-color);
   }
 
+  .theme-toggle {
+    background: none;
+    border: 2px solid var(--nav-text-color);
+    border-radius: 50px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 60px;
+    height: 40px;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent-color);
+    transform: scale(1.05);
+  }
+
+  .theme-toggle .sun-icon,
+  .theme-toggle .moon-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+  }
+
   main {
-    min-height: calc(100vh - 200px);
+    flex: 1;
   }
 
   footer {
     margin-top: 4rem;
     text-align: center;
-    color: #666;
+    color: var(--footer-text-color);
     font-size: 0.9rem;
+    padding: 2rem 0;
+    transition: color 0.3s ease;
   }
 
   nav a {
     font-weight: 700;
     font-variation-settings: 'wght' 700;
-    /* font-family: var(--font-family-heading); */
   }
 
   h1, h2, h3, h4, h5, h6 {

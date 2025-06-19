@@ -48,11 +48,14 @@ const { title, description, pubDate, author = "Your Name" } = Astro.props;
     font-size: 2.5rem;
     line-height: 1.2;
     margin-bottom: 1rem;
+    color: var(--post-title-color);
+    transition: color 0.3s ease;
   }
 
   .metadata {
-    color: #666;
+    color: var(--post-meta-color);
     font-size: 0.9rem;
+    transition: color 0.3s ease;
   }
 
   .author {
@@ -62,15 +65,21 @@ const { title, description, pubDate, author = "Your Name" } = Astro.props;
   .content {
     font-size: 1.1rem;
     line-height: 1.7;
+    color: var(--post-description-color);
+    transition: color 0.3s ease;
   }
 
   .content :global(h2) {
     font-size: 1.8rem;
     margin: 2rem 0 1rem;
+    color: var(--section-heading-color);
+    transition: color 0.3s ease;
   }
 
   .content :global(p) {
     margin-bottom: 1.5rem;
+    color: var(--post-description-color);
+    transition: color 0.3s ease;
   }
 
   .content :global(img) {
@@ -85,6 +94,39 @@ const { title, description, pubDate, author = "Your Name" } = Astro.props;
     padding-left: 1rem;
     margin: 2rem 0;
     font-style: italic;
-    color: #555;
+    color: var(--post-meta-color);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .content :global(a) {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .content :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  .content :global(code) {
+    background-color: var(--post-card-hover-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+
+  .content :global(pre) {
+    background-color: var(--post-card-hover-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    transition: background-color 0.3s ease;
+  }
+
+  .content :global(pre code) {
+    background: none;
+    padding: 0;
   }
 </style> 
