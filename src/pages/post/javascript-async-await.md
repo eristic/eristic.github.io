@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Understanding Async/Await in JavaScript"
 description: "Master asynchronous programming in JavaScript with async/await patterns"
 pubDate: 2024-03-11
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Async/await has revolutionized how we handle asynchronous operations in JavaScript. Let's explore this powerful feature.
@@ -13,11 +13,11 @@ Async/await has revolutionized how we handle asynchronous operations in JavaScri
 ```javascript
 async function fetchUser() {
   try {
-    const response = await fetch('/api/user');
+    const response = await fetch("/api/user");
     const user = await response.json();
     return user;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 ```
@@ -43,10 +43,7 @@ async function handleData() {
 
 ```javascript
 // Run promises in parallel
-const [users, posts] = await Promise.all([
-  fetchUsers(),
-  fetchPosts()
-]);
+const [users, posts] = await Promise.all([fetchUsers(), fetchPosts()]);
 ```
 
 ## Best Practices
@@ -56,4 +53,4 @@ const [users, posts] = await Promise.all([
 3. Avoid mixing with .then() chains
 4. Keep async functions focused
 
-Remember: Async/await is just syntactic sugar over promises! 
+Remember: Async/await is just syntactic sugar over promises!

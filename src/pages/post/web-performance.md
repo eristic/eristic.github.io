@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Web Performance Optimization Techniques"
 description: "Essential strategies and best practices for building fast, efficient websites"
 pubDate: 2024-03-09
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Web performance is crucial for user experience and SEO. Here are key techniques to optimize your website.
@@ -13,8 +13,8 @@ Web performance is crucial for user experience and SEO. Here are key techniques 
 ```html
 <!-- Use modern formats -->
 <picture>
-  <source srcset="image.webp" type="image/webp">
-  <img src="image.jpg" alt="Description" loading="lazy">
+  <source srcset="image.webp" type="image/webp" />
+  <img src="image.jpg" alt="Description" loading="lazy" />
 </picture>
 ```
 
@@ -22,7 +22,7 @@ Web performance is crucial for user experience and SEO. Here are key techniques 
 
 ```javascript
 // Dynamic imports
-const MyComponent = lazy(() => import('./MyComponent'));
+const MyComponent = lazy(() => import("./MyComponent"));
 ```
 
 ## Critical CSS
@@ -36,12 +36,13 @@ Inline critical styles:
     /* ... */
   }
 </style>
-<link rel="preload" href="styles.css" as="style">
+<link rel="preload" href="styles.css" as="style" />
 ```
 
 ## Performance Metrics
 
 Key metrics to monitor:
+
 - First Contentful Paint (FCP)
 - Largest Contentful Paint (LCP)
 - Time to Interactive (TTI)
@@ -55,4 +56,4 @@ Key metrics to monitor:
 4. Cache effectively
 5. Optimize JavaScript execution
 
-Remember: Performance is a feature, not an afterthought! 
+Remember: Performance is a feature, not an afterthought!

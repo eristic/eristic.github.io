@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "React Hooks Explained Simply"
 description: "A beginner-friendly guide to understanding and using React Hooks effectively"
 pubDate: 2024-03-15
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 React Hooks have transformed how we write React components. Let's break down the most important hooks and their use cases.
@@ -35,11 +35,11 @@ Create reusable logic with custom hooks:
 function useWindowSize() {
   const [size, setSize] = useState({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
   });
-  
+
   // ... implementation
-  
+
   return size;
 }
 ```
@@ -51,4 +51,4 @@ function useWindowSize() {
 3. Keep effects focused and minimal
 4. Use dependency arrays correctly
 
-Remember: Hooks are a powerful way to reuse stateful logic without class components. 
+Remember: Hooks are a powerful way to reuse stateful logic without class components.

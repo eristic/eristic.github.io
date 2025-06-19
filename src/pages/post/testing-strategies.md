@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Modern Testing Strategies for Web Applications"
 description: "A comprehensive guide to testing your web applications effectively"
 pubDate: 2024-03-08
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Testing is crucial for maintaining reliable applications. Let's explore different testing strategies and best practices.
@@ -13,8 +13,8 @@ Testing is crucial for maintaining reliable applications. Let's explore differen
 ### Unit Tests
 
 ```javascript
-describe('Calculator', () => {
-  test('adds two numbers correctly', () => {
+describe("Calculator", () => {
+  test("adds two numbers correctly", () => {
     expect(add(2, 2)).toBe(4);
   });
 });
@@ -23,9 +23,9 @@ describe('Calculator', () => {
 ### Integration Tests
 
 ```javascript
-describe('UserAPI', () => {
-  it('creates and retrieves a user', async () => {
-    const user = await createUser({ name: 'John' });
+describe("UserAPI", () => {
+  it("creates and retrieves a user", async () => {
+    const user = await createUser({ name: "John" });
     const retrieved = await getUser(user.id);
     expect(retrieved).toEqual(user);
   });
@@ -54,4 +54,4 @@ describe('UserAPI', () => {
 - Playwright
 - React Testing Library
 
-Remember: Tests are an investment in your application's future! 
+Remember: Tests are an investment in your application's future!

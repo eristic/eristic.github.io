@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Mastering CSS Grid Layout"
 description: "A deep dive into CSS Grid and how it can transform your web layouts"
 pubDate: 2024-03-17
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 CSS Grid has revolutionized how we create web layouts. Let's explore its powerful features and capabilities.
@@ -43,4 +43,4 @@ Some advanced features include:
 1. Start with mobile layouts
 2. Use named grid areas for clarity
 3. Combine with Flexbox when appropriate
-4. Test across different screen sizes 
+4. Test across different screen sizes

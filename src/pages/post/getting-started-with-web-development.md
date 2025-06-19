@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Getting Started with Web Development in 2024"
 description: "A comprehensive guide for beginners looking to start their web development journey"
 pubDate: 2024-03-18
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Web development can seem overwhelming at first, but with the right approach, anyone can learn it. Here's a structured path to get you started.
@@ -34,4 +34,4 @@ After mastering the basics, you can explore:
 - Database management
 - DevOps and deployment
 
-Remember, the key is to practice regularly and build projects that interest you. Start small and gradually increase complexity as you learn. 
+Remember, the key is to practice regularly and build projects that interest you. Start small and gradually increase complexity as you learn.

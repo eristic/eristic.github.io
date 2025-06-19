@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Responsive Design Principles for Modern Web"
 description: "Learn how to create websites that look great on any device using responsive design principles"
 pubDate: 2024-03-12
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Responsive design is more important than ever with the variety of devices accessing the web. Here's how to do it right.
@@ -52,8 +52,9 @@ img {
 ## Breakpoint Best Practices
 
 Common breakpoints:
+
 - Mobile: 320px - 480px
 - Tablet: 768px - 1024px
 - Desktop: 1024px and up
 
-Remember: Design for content, not devices! 
+Remember: Design for content, not devices!

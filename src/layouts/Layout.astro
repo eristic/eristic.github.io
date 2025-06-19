@@ -28,8 +28,9 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
             <a href="/post">All posts</a>
           </nav>
           <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-            <span class="sun-icon">☀️</span>
-            <span class="moon-icon">🌙</span>
+            <span class="light-icon">👏</span>
+            <span class="dark-icon">👏</span>
+            <span class="tooltip" id="theme-tooltip">Clap off</span>
           </button>
         </div>
       </header>
@@ -37,7 +38,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
         <slot />
       </main>
       <footer>
-        <p>&copy; {new Date().getFullYear()} Your Name. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Scott Stewart. All rights reserved.</p>
       </footer>
     </div>
 
@@ -47,6 +48,14 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
       (function() {
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Also set the tooltip text early to prevent flash
+        setTimeout(() => {
+          const tooltip = document.getElementById('theme-tooltip');
+          if (tooltip) {
+            tooltip.textContent = savedTheme === 'dark' ? 'Clap on' : 'Clap off';
+          }
+        }, 0);
       })();
     </script>
 
@@ -60,16 +69,19 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
 
         // Update toggle button state
         function updateToggleButton(theme: string) {
-          const sunIcon = themeToggle!.querySelector('.sun-icon');
-          const moonIcon = themeToggle!.querySelector('.moon-icon');
+          const lightIcon = themeToggle!.querySelector('.light-icon');
+          const darkIcon = themeToggle!.querySelector('.dark-icon');
+          const tooltip = themeToggle!.querySelector('.tooltip') as HTMLElement;
           
-          if (sunIcon && moonIcon) {
+          if (lightIcon && darkIcon && tooltip) {
             if (theme === 'dark') {
-              (sunIcon as HTMLElement).style.opacity = '1';
-              (moonIcon as HTMLElement).style.opacity = '0';
+              (lightIcon as HTMLElement).style.opacity = '0';
+              (darkIcon as HTMLElement).style.opacity = '1';
+              tooltip.textContent = 'Clap on';
             } else {
-              (sunIcon as HTMLElement).style.opacity = '0';
-              (moonIcon as HTMLElement).style.opacity = '1';
+              (lightIcon as HTMLElement).style.opacity = '1';
+              (darkIcon as HTMLElement).style.opacity = '0';
+              tooltip.textContent = 'Clap off';
             }
           }
         }
@@ -83,8 +95,16 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
           html.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
           
-          // Update button state
+          // Update button state and hide tooltip
           updateToggleButton(newTheme);
+          
+          // Hide tooltip after clicking
+          const tooltip = themeToggle!.querySelector('.tooltip') as HTMLElement;
+          if (tooltip) {
+            tooltip.style.opacity = '0';
+            tooltip.style.visibility = 'hidden';
+            tooltip.style.transform = 'translateX(-50%)';
+          }
           
           // Dispatch custom event for other components that might need to know
           window.dispatchEvent(new CustomEvent('themeChanged', { 
@@ -96,8 +116,27 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
         const currentTheme = html.getAttribute('data-theme') || 'light';
         updateToggleButton(currentTheme);
         
-        // Add event listener
+        // Add event listeners
         themeToggle.addEventListener('click', handleToggle);
+        
+        // Add hover event listeners for tooltip
+        themeToggle.addEventListener('mouseenter', () => {
+          const tooltip = themeToggle.querySelector('.tooltip') as HTMLElement;
+          if (tooltip) {
+            tooltip.style.opacity = '1';
+            tooltip.style.visibility = 'visible';
+            tooltip.style.transform = 'translateX(-50%) translateY(4px)';
+          }
+        });
+        
+        themeToggle.addEventListener('mouseleave', () => {
+          const tooltip = themeToggle.querySelector('.tooltip') as HTMLElement;
+          if (tooltip) {
+            tooltip.style.opacity = '0';
+            tooltip.style.visibility = 'hidden';
+            tooltip.style.transform = 'translateX(-50%)';
+          }
+        });
       }
 
       // Initialize theme toggle when DOM is ready
@@ -129,8 +168,10 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --post-title-color: #1b1928;
     --post-description-color: #1b1928;
     --post-meta-color: #1b1928;
-    --section-heading-color: #DFECFF;
+    --section-heading-color: #020202;
     --view-all-color: #DFECFF;
+    --blog-post-bg: #fafafa;
+    --bg-color: #ffffff;
   }
 
   /* Dark theme */
@@ -147,8 +188,10 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --post-title-color: #f7fafc;
     --post-description-color: #e2e8f0;
     --post-meta-color: #cbd5e0;
-    --section-heading-color: #90cdf4;
-    --view-all-color: #90cdf4;
+    --section-heading-color: #f7fafc;
+    --view-all-color: #f7fafc;
+    --blog-post-bg: #1e293b;
+    --bg-color: #0f172a;
   }
 
   * {
@@ -203,30 +246,87 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
 
   .theme-toggle {
     background: none;
-    border: 2px solid var(--nav-text-color);
-    border-radius: 50px;
+    border: 2px solid transparent;
     padding: 8px 12px;
     cursor: pointer;
     font-size: 1.2rem;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
     min-width: 60px;
     height: 40px;
   }
 
   .theme-toggle:hover {
-    border-color: var(--accent-color);
     transform: scale(1.05);
   }
 
-  .theme-toggle .sun-icon,
-  .theme-toggle .moon-icon {
+  .theme-toggle .light-icon,
+  .theme-toggle .dark-icon {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .theme-toggle .tooltip {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    z-index: 1000;
+    pointer-events: none;
+    font-family: 'Montserrat Variable', sans-serif;
+  }
+
+  /* Light mode tooltip */
+  [data-theme="light"] .theme-toggle .tooltip {
+    background-color: #1b1928;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  [data-theme="light"] .theme-toggle .tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: #1b1928;
+  }
+
+  /* Dark mode tooltip */
+  [data-theme="dark"] .theme-toggle .tooltip {
+    background-color: #f7fafc;
+    color: #1a202c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  [data-theme="dark"] .theme-toggle .tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: #f7fafc;
+  }
+
+  .theme-toggle:hover .tooltip,
+  .theme-toggle:focus .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(4px);
   }
 
   main {

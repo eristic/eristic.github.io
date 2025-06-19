@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "TypeScript Essentials for Modern Development"
 description: "Learn the key concepts of TypeScript and why it's becoming the standard for web development"
 pubDate: 2024-03-16
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 TypeScript has become an essential tool in modern web development. Let's explore why and how to use it effectively.
@@ -52,4 +52,4 @@ TypeScript works seamlessly with:
 - Vue
 - Angular
 - Node.js
-- Astro 
+- Astro

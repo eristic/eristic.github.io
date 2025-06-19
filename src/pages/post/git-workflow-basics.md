@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Git Workflow Basics for Developers"
 description: "Master the fundamental Git commands and workflows for effective version control"
 pubDate: 2024-03-13
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Understanding Git is crucial for modern development. Here's a guide to the essential commands and workflows.
@@ -52,4 +52,4 @@ git reset --soft HEAD~1
 git commit --amend
 ```
 
-Remember: Git is your friend, not your enemy. Take time to learn it properly! 
+Remember: Git is your friend, not your enemy. Take time to learn it properly!

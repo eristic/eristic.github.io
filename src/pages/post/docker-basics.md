@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: "Docker Basics for Developers"
 description: "Get started with Docker containerization for modern application development"
 pubDate: 2024-03-10
-author: "Your Name"
+author: "Scott Stewart"
 ---
 
 Docker has become an essential tool in modern development. Let's learn the basics of containerization.
@@ -43,7 +43,7 @@ CMD ["npm", "start"]
 ## Docker Compose
 
 ```yaml
-version: '3'
+version: "3"
 services:
   web:
     build: .
@@ -62,4 +62,4 @@ services:
 3. Multi-stage builds for production
 4. Don't run as root
 
-Remember: Containers should be ephemeral and stateless! 
+Remember: Containers should be ephemeral and stateless!
