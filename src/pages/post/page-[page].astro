@@ -1,24 +1,55 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import type { MarkdownInstance } from 'astro';
 
-const posts = await Astro.glob('./*.md');
-posts.sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+interface PostFrontmatter {
+  title: string;
+  pubDate: string;
+  author?: string;
+}
 
-// Pagination logic
-const postsPerPage = 5;
-const totalPosts = posts.length;
-const totalPages = Math.ceil(totalPosts / postsPerPage);
+type Post = MarkdownInstance<PostFrontmatter>;
 
-// For the first page, show first 5 posts
-const currentPosts = posts.slice(0, postsPerPage);
+export async function getStaticPaths() {
+  // Get all markdown files from the current directory and test-articles subdirectory
+  const rootPosts: Post[] = await Astro.glob('./*.md');
+  // Combine all posts
+  const posts: Post[] = [...rootPosts];
+  
+  // Sort by date
+  posts.sort((a: Post, b: Post) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+  
+  const postsPerPage = 5;
+  const totalPosts: number = posts.length;
+  const totalPages: number = Math.ceil(totalPosts / postsPerPage);
+  
+  return Array.from({ length: totalPages }, (_, i) => {
+    const page: number = i + 1;
+    const startIndex: number = i * postsPerPage;
+    const endIndex: number = startIndex + postsPerPage;
+    const currentPosts: Post[] = posts.slice(startIndex, endIndex);
+    
+    return {
+      params: { page: page.toString() },
+      props: { 
+        posts: currentPosts, 
+        currentPage: page, 
+        totalPages, 
+        totalPosts,
+        startIndex,
+        endIndex
+      }
+    };
+  });
+}
 
-// Generate pagination info
-const hasPagination = totalPosts > postsPerPage;
-const hasNextPage = totalPages > 1;
+const { posts, currentPage, totalPages, totalPosts, startIndex, endIndex } = Astro.props;
+const hasPagination: boolean = totalPosts > 5;
+const hasNextPage: boolean = currentPage < totalPages;
+const hasPrevPage: boolean = currentPage > 1;
 
 // Function to generate pagination numbers with ellipsis
 function generatePaginationNumbers(current: number, total: number) {
-  
   // Original logic for page 1 and last page
   const delta = 1; // Number of pages to show before and after current page
   const range = [];
@@ -56,10 +87,10 @@ function generatePaginationNumbers(current: number, total: number) {
   return rangeWithDots;
 }
 
-const paginationNumbers = generatePaginationNumbers(1, totalPages);
+const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
 ---
 
-<Layout title="All Posts | Scott's Thoughts" description="Read my latest blog posts">
+<Layout title={`Page ${currentPage} | All Posts | Scott's Thoughts`} description="Read my latest blog posts">
   <section class="hero">
     <div class="container">
       <h1>All Blog Posts</h1>
@@ -70,7 +101,7 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
   <div class="container">
     <section class="featured">
       <div class="post-grid">
-        {currentPosts.map(post => (
+        {posts.map(post => (
           <a href={post.url} class="post-card">
             <div class="post-card-content">
               <h3>
@@ -99,20 +130,26 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
         <nav class="pagination" aria-label="Blog post pagination">
           <div class="pagination-info">
             <div class="pagination-stats">
-              <span class="page-indicator">Page {1} of {totalPages}</span>
-              <span class="posts-indicator">Showing 1-5 of {totalPosts} posts</span>
+              <span class="page-indicator">Page {currentPage} of {totalPages}</span>
+              <span class="posts-indicator">Showing {startIndex + 1}-{Math.min(endIndex, totalPosts)} of {totalPosts} posts</span>
             </div>
           </div>
           
           <div class="pagination-controls">
+            {hasPrevPage && (
+              <a href={currentPage === 2 ? '/post/' : `/post/page-${currentPage - 1}`} class="pagination-link prev">
+                ← Previous
+              </a>
+            )}
+            
             <div class="pagination-numbers">
               {paginationNumbers.map((pageNum) => (
                 pageNum === '...' 
                   ? <span class="pagination-ellipsis">…</span>
                   : <a 
                       href={pageNum === 1 ? '/post/' : `/post/page-${pageNum}`}
-                      class={`pagination-link ${pageNum === 1 ? 'active' : ''}`}
-                      aria-current={pageNum === 1 ? 'page' : undefined}
+                      class={`pagination-link ${pageNum === currentPage ? 'active' : ''}`}
+                      aria-current={pageNum === currentPage ? 'page' : undefined}
                     >
                       {pageNum}
                     </a>
@@ -120,7 +157,7 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
             </div>
             
             {hasNextPage && (
-              <a href="/post/page-2" class="pagination-link next">
+              <a href={`/post/page-${currentPage + 1}`} class="pagination-link next">
                 Next →
               </a>
             )}
@@ -254,16 +291,6 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
     text-decoration: none;
   }
 
-  .post-card-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .post-card-link:hover {
-    text-decoration: none;
-  }
-
   .pagination {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -332,26 +359,6 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
     border: 1px solid transparent;
   }
 
-  .pagination-link:hover {
-    background: var(--post-card-hover-bg);
-    text-decoration: none;
-    transform: translateY(-1px);
-    border-color: var(--post-title-color);
-  }
-
-  .pagination-link.active {
-    background: var(--post-title-color);
-    color: var(--post-card-bg);
-    font-weight: 700;
-    border-color: var(--post-title-color);
-  }
-
-  .pagination-link.prev,
-  .pagination-link.next {
-    min-width: auto;
-    padding: 0.5rem 1rem;
-  }
-  
   .pagination-ellipsis {
     display: inline-flex;
     align-items: center;
@@ -361,6 +368,12 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
     color: var(--post-meta-color);
     font-size: 1.2rem;
     font-weight: 700;
+  }
+
+  .pagination-link.prev,
+  .pagination-link.next {
+    min-width: auto;
+    padding: 0.5rem 1rem;
   }
 
   @media (max-width: 600px) {

@@ -70,7 +70,7 @@ try {
         <h1>{title}</h1>
         {description && <p class="hero-description">{description}</p>}
         <div class="hero-meta">
-          <time class="hero-date">{dateObject.toLocaleDateString('en-US', { 
+          <time class="hero-date">{dateObject?.toLocaleDateString('en-US', { 
             year: 'numeric', 
             month: 'long', 
             day: 'numeric'  
