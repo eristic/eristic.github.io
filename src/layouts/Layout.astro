@@ -24,8 +24,8 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
       <header>
         <div class="container">
           <nav>
-            <a href="/">Latest posts</a>
-            <a href="/post">All posts</a>
+            <a href="/" class="nav-link">Latest posts</a>
+            <a href="/post" class="nav-link">All posts</a>
           </nav>
           <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
             <span class="light-icon">👏</span>
@@ -145,6 +145,36 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
       // Also handle page transitions (for Astro view transitions)
       document.addEventListener('astro:page-load', initThemeToggle);
     </script>
+
+    <script>
+      // Handle active navigation links
+      function setActiveNavLink() {
+        const navLinks = document.querySelectorAll('nav .nav-link');
+        const currentPath = window.location.pathname;
+        
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          
+          // Remove any existing active class
+          link.classList.remove('nav-link-active');
+          
+          // Check if this is the active link
+          if (href) {
+            if (href === '/' && (currentPath === '/' || currentPath === '')) {
+              link.classList.add('nav-link-active');
+            } else if (href !== '/' && currentPath.startsWith(href)) {
+              link.classList.add('nav-link-active');
+            }
+          }
+        });
+      }
+
+      // Initialize active nav links when DOM is ready
+      document.addEventListener('DOMContentLoaded', setActiveNavLink);
+      
+      // Also handle page transitions (for Astro view transitions)
+      document.addEventListener('astro:page-load', setActiveNavLink);
+    </script>
   </body>
 </html>
 
@@ -160,7 +190,10 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --background-color: #5b7c99;
     --accent-color: #3498db;
     --nav-text-color: #DFECFF;
-    --footer-text-color: #666;
+    --nav-link-bg: rgba(255, 255, 255, 0.15);
+    --nav-link-hover-bg: rgba(255, 255, 255, 0.25);
+    --nav-link-active-bg: rgba(255, 255, 255, 0.3);
+    --footer-text-color: #ffffff;
     --hero-bg-color: #e3dfdf;
     --hero-border-color: #000;
     --post-card-bg: linear-gradient(90deg, rgba(241, 241, 242, 1) 0%, rgba(91, 124, 153, 1) 100%);
@@ -172,7 +205,11 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --view-all-color: #DFECFF;
     --blog-post-bg: #fafafa;
     --bg-color: #ffffff;
-    --pagination-link-bg: #e3dfdf;
+    --pagination-separator-color: #FFFFFF;
+    --pagination-link-bg: #f7f7f7; 
+    --pagination-link-hover-bg: #d3dfee;
+    --pagination-link-active-bg: #fff;
+    --pagination-link-active-border-color: #000;
   }
 
   /* Dark theme */
@@ -181,6 +218,9 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --background-color: #1a202c;
     --accent-color: #60a5fa;
     --nav-text-color: #cbd5e0;
+    --nav-link-bg: rgba(255, 255, 255, 0.1);
+    --nav-link-hover-bg: rgba(255, 255, 255, 0.15);
+    --nav-link-active-bg: rgba(255, 255, 255, 0.2);
     --footer-text-color: #a0aec0;
     --hero-bg-color: #2d3748;
     --hero-border-color: #4a5568;
@@ -193,7 +233,11 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --view-all-color: #f7fafc;
     --blog-post-bg: #1e293b;
     --bg-color: #0f172a;
+    --pagination-separator-color: #cbd5e0;
     --pagination-link-bg: #1e293b;
+    --pagination-link-hover-bg: #374151;
+    --pagination-link-active-bg: #374151;
+    --pagination-link-active-border-color: #f7fafc;
   }
 
   * {
@@ -239,11 +283,38 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     font-weight: 900;
     font-variation-settings: 'wght' 900;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   nav a:hover {
-    color: var(--accent-color);
+    color: var(--nav-text-color);
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--nav-link-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+  }
+
+  .nav-link:hover {
+    background-color: var(--nav-link-hover-bg);
+    transform: translateY(-2px);
+    color: var(--nav-text-color);
+  }
+
+  .nav-link:active {
+    background-color: var(--nav-link-active-bg);
+    transform: translateY(0);
+  }
+
+  .nav-link-active {
+    background-color: var(--nav-link-active-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
   }
 
   .theme-toggle {
