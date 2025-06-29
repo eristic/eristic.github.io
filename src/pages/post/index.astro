@@ -110,7 +110,7 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
                 pageNum === '...' 
                   ? <span class="pagination-ellipsis">…</span>
                   : <a 
-                      href={pageNum === 1 ? '/post/' : `/post/page-${pageNum}`}
+                      href={pageNum === 1 ? '/post/' : `/post/${pageNum}`}
                       class={`pagination-link ${pageNum === 1 ? 'active' : ''}`}
                       aria-current={pageNum === 1 ? 'page' : undefined}
                     >
@@ -120,7 +120,7 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
             </div>
             
             {hasNextPage && (
-              <a href="/post/page-2" class="pagination-link next">
+              <a href="/post/2" class="pagination-link next">
                 Next →
               </a>
             )}

@@ -89,7 +89,7 @@ function generatePaginationNumbers(current: number, total: number) {
 const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
 ---
 
-<Layout title={`Page ${currentPage} | All Posts | Scott's Thoughts`} description="Read my latest blog posts">
+<Layout title={`${currentPage} | All Posts | Scott's Thoughts`} description="Read my latest blog posts">
   <section class="hero">
     <div class="container">
       <h1>All Blog Posts</h1>
@@ -136,7 +136,7 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
           
           <div class="pagination-controls">
             {hasPrevPage && (
-              <a href={currentPage === 2 ? '/post/' : `/post/page-${currentPage - 1}`} class="pagination-link prev">
+              <a href={currentPage === 2 ? '/post/' : `/post/${currentPage - 1}`} class="pagination-link prev">
                 ← Previous
               </a>
             )}
@@ -146,7 +146,7 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
                 pageNum === '...' 
                   ? <span class="pagination-ellipsis">…</span>
                   : <a 
-                      href={pageNum === 1 ? '/post/' : `/post/page-${pageNum}`}
+                      href={pageNum === 1 ? '/post/' : `/post/${pageNum}`}
                       class={`pagination-link ${pageNum === currentPage ? 'active' : ''}`}
                       aria-current={pageNum === currentPage ? 'page' : undefined}
                     >
@@ -156,7 +156,7 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
             </div>
             
             {hasNextPage && (
-              <a href={`/post/page-${currentPage + 1}`} class="pagination-link next">
+              <a href={`/post/${currentPage + 1}`} class="pagination-link next">
                 Next →
               </a>
             )}
