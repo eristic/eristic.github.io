@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Get all posts
+const posts = await Astro.glob('../post/*.md');
+
+// Extract all unique tags and count posts for each tag
+const tagCounts = new Map<string, number>();
+posts.forEach(post => {
+  const tags = post.frontmatter.tags || [];
+  tags.forEach((tag: string) => {
+    const normalizedTag = tag.toLowerCase();
+    tagCounts.set(normalizedTag, (tagCounts.get(normalizedTag) || 0) + 1);
+  });
+});
+
+// Convert to array and sort alphabetically
+const sortedTags = Array.from(tagCounts.entries())
+  .sort((a, b) => a[0].localeCompare(b[0]))
+  .map(([tag, count]) => ({
+    name: tag,
+    count,
+    displayName: tag.charAt(0).toUpperCase() + tag.slice(1)
+  }));
+---
+
+<Layout title="Tags | Scott's Thoughts" description="Browse posts by tag">
+  <section class="hero">
+    <div class="container">
+      <h1>Browse by Tag</h1>
+      <p>Find posts organized by topic</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="tags-section">
+      <div class="tags-grid">
+        {sortedTags.map(tag => (
+          <a href={`/tags/${tag.name}`} class="tag-card">
+            <h3>{tag.displayName}</h3>
+            <span class="post-count">{tag.count} {tag.count === 1 ? 'post' : 'posts'}</span>
+          </a>
+        ))}
+      </div>
+      
+      <div class="back-link">
+        <a href="/" class="view-all-link">Back to home</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero {
+    background-color: var(--hero-bg-color);
+    border-bottom: 5px solid var(--hero-border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 1.7rem;
+  }
+
+  .hero h1 {
+    margin: 0;
+    color: var(--post-title-color);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--post-description-color);
+    line-height: 1.7;
+  }
+
+  .tags-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tag-card {
+    background-color: var(--post-card-bg);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .tag-card:hover {
+    background-color: var(--post-card-hover-bg);
+    transform: translateY(-3px);
+  }
+
+  .tag-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--post-title-color);
+    font-size: 1.5rem;
+  }
+
+  .post-count {
+    color: var(--post-meta-color);
+    font-size: 0.9rem;
+  }
+
+  .back-link {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .view-all-link {
+    color: var(--nav-text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-variation-settings: 'wght' 500;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--nav-link-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .view-all-link:hover {
+    background-color: var(--nav-link-hover-bg);
+    transform: translateY(-2px);
+  }
+</style> 

@@ -4,6 +4,7 @@ title: "Essential Web Accessibility Tips"
 description: "Make your websites accessible to everyone with these practical tips and best practices"
 pubDate: 2024-03-14
 author: "Scott Stewart"
+tags: [Creativity]
 ---
 
 ## Basic Markdown Syntax Testing

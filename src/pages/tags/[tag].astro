@@ -1,0 +1,211 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { MarkdownInstance } from 'astro';
+
+interface PostFrontmatter {
+  title: string;
+  pubDate: string;
+  description?: string;
+  author?: string;
+  tags?: string[];
+}
+
+type Post = MarkdownInstance<PostFrontmatter>;
+
+interface TagStaticPath {
+  params: { tag: string };
+  props: { posts: Post[]; tag: string };
+}
+
+export async function getStaticPaths(): Promise<TagStaticPath[]> {
+  const posts = await Astro.glob<PostFrontmatter>('../post/*.md');
+  
+  // Get all unique tags
+  const allTags = new Set<string>();
+  posts.forEach((post: Post) => {
+    const tags = post.frontmatter.tags || [];
+    tags.forEach((tag: string) => allTags.add(tag.toLowerCase()));
+  });
+  
+  // Create a path for each tag
+  return Array.from(allTags).map((tag: string): TagStaticPath => {
+    // Filter posts that have this tag
+    const filteredPosts: Post[] = posts.filter((post: Post) => 
+      (post.frontmatter.tags || []).map((t: string) => t.toLowerCase()).includes(tag.toLowerCase())
+    );
+    
+    // Sort posts by date
+    filteredPosts.sort((a: Post, b: Post) => 
+      new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+    );
+    
+    return {
+      params: { tag },
+      props: { posts: filteredPosts, tag }
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
+---
+
+<Layout title={`${capitalizedTag} | Tag | Scott's Thoughts`} description={`Posts tagged with ${tag}`}>
+  <section class="hero">
+    <div class="container">
+      <h1>Posts tagged with "{capitalizedTag}"</h1>
+      <p>Explore all articles related to this topic.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="featured">
+      <div class="post-grid">
+        {posts.map((post: Post) => (
+          <a href={post.url} class="post-card">
+            <div class="post-card-content">
+              <h3>
+                {post.frontmatter.title}
+              </h3>
+              <div class="post-metadata">
+                {post.frontmatter.pubDate && (
+                  <time datetime={new Date(post.frontmatter.pubDate).toISOString()}>
+                    {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                )}
+                {post.frontmatter.author && (
+                  <span class="author">by {post.frontmatter.author}</span>
+                )}
+              </div>
+              {post.frontmatter.description && (
+                <p class="description">{post.frontmatter.description}</p>
+              )}
+              {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+                <div class="post-tags">
+                  {post.frontmatter.tags.map((tag: string) => (
+                    <a href={`/tags/${tag.toLowerCase()}`} class="tag">{tag}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <div class="back-link">
+        <a href="/tags" class="view-all-link">View all tags</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero {
+    background-color: var(--hero-bg-color);
+    border-bottom: 5px solid var(--hero-border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 1.7rem;
+  }
+
+  .hero h1 {
+    margin: 0;
+    color: var(--post-title-color);
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--post-description-color);
+    line-height: 1.7;
+  }
+
+  h3 {
+    margin-bottom: 0;
+    margin-top: 0;
+    color: var(--post-title-color);
+    font-size: 1.5rem;
+  }
+
+  .post-card {
+    display: block;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background: var(--post-card-bg);
+    border-radius: 15px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .post-card:hover {
+    background: var(--post-card-hover-bg);
+    transform: translateY(-3px);
+  }
+
+  .post-metadata {
+    margin-bottom: 0.5rem;
+    color: var(--post-meta-color);
+    font-size: 0.9rem;
+  }
+
+  .description {
+    color: var(--post-description-color);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    background-color: var(--tag-bg-color, #e9ecef);
+    color: var(--tag-text-color, #495057);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+    font-variation-settings: 'wght' 600;
+  }
+
+  .tag:hover {
+    background-color: var(--tag-hover-bg-color, #ced4da);
+  }
+
+  .back-link {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .view-all-link {
+    color: var(--nav-text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-variation-settings: 'wght' 500;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--nav-link-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .view-all-link:hover {
+    background-color: var(--nav-link-hover-bg);
+    transform: translateY(-2px);
+  }
+</style> 

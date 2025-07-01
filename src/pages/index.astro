@@ -13,7 +13,7 @@ const latestPosts = sortedPosts.slice(0, 3);
 <Layout title="Home | My Blog">
 	<section class="hero">
 		<div class="container">
-			<h1>Scott Thoughts</h1>
+			<h1>Scott's Thoughts</h1>
 			<p>A place where creativity and technology play and sometimes fight.</p>
 		</div>
 	</section>
@@ -40,6 +40,13 @@ const latestPosts = sortedPosts.slice(0, 3);
 						</div>
 						{post.frontmatter.description && (
 							<p class="description">{post.frontmatter.description}</p>
+						)}
+						{post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+							<div class="post-tags">
+								{post.frontmatter.tags.map((tag: string) => (
+									<a href={`/tags/${tag.toLowerCase()}`} class="tag">{tag}</a>
+								))}
+							</div>
 						)}
 					</div>
 					<div class="read-more">	
@@ -195,4 +202,22 @@ const latestPosts = sortedPosts.slice(0, 3);
 		color: var(--nav-text-color);
 		text-decoration: none;
 	}
+	
+	.tag {
+		color: var(--tag-color);
+		font-size: 0.9rem;
+		font-weight: 500;
+		font-variation-settings: "wght" 500;
+		text-decoration: none;
+		padding: 0.5rem 1rem;
+		border-radius: 6px;
+		background-color: var(--nav-link-bg);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+		letter-spacing: 0.5px;
+	}
+
+	.tag:hover {
+		transform: translateY(-2px);
+  	}
 </style>

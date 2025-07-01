@@ -7,11 +7,13 @@ interface Props {
     description?: string;
     pubDate: Date | string;
     author?: string;
+    tags?: string[];
   };
   title?: string;
   description?: string;
   pubDate?: Date | string;
   author?: string;
+  tags?: string[];
 }
 
 const { frontmatter } = Astro.props;
@@ -20,9 +22,9 @@ const { frontmatter } = Astro.props;
 const title = frontmatter?.title || Astro.props.title || 'Untitled';
 const description = frontmatter?.description || Astro.props.description;
 const author = frontmatter?.author || Astro.props.author || "Scott Stewart";
+const tags = frontmatter?.tags || Astro.props.tags || [];
 const rawPubDate = frontmatter?.pubDate || Astro.props.pubDate;
 
-// Convert pubDate to Date object if it's a string, with better error handling
 // Convert pubDate to Date object if it's a string, with better error handling
 let dateObject: Date | null = null;
 try {
@@ -69,6 +71,13 @@ try {
       <div class="hero-content">
         <h1>{title}</h1>
         {description && <p class="hero-description">{description}</p>}
+        {tags && tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map(tag => (
+              <a href={`/tags/${tag.toLowerCase()}`} class="tag">{tag}</a>
+            ))}
+          </div>
+        )}
         <div class="hero-meta">
           <time class="hero-date">{dateObject?.toLocaleDateString('en-US', { 
             year: 'numeric', 
@@ -117,6 +126,34 @@ try {
     font-variation-settings: 'wght' 500;
   }
 
+  /* Add tag styles */
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
+  .tag {
+    color: var(--tag-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-variation-settings: "wght" 500;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--nav-link-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .tag:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Existing styles */
   .hero {
     background-color: var(--hero-bg-color);
     border-bottom: 5px solid var(--hero-border-color);

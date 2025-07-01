@@ -4,6 +4,7 @@ title: "Hello, World!"
 description: "Welcome to my new blog built with Astro"
 pubDate: 2024-03-19
 author: "Scott Stewart"
+tags: [Hello]
 ---
 
 Welcome to my new blog! This is my first post on this platform, built with Astro. I'm excited to share my thoughts, ideas, and experiences here.

@@ -26,6 +26,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
           <nav>
             <a href="/" class="nav-link">Latest posts</a>
             <a href="/post" class="nav-link">All posts</a>
+            <a href="/tags" class="nav-link">Browse by tag</a>
           </nav>
           <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
             <span class="light-icon">👏</span>
@@ -180,8 +181,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
 
 <style>
   :root {
-    --font-family-body: 'Merriweather Variable', serif;
-    --font-family-heading: 'Montserrat Variable', sans-serif;
+    body: 'Montserrat Variable', sans-serif;
   }
 
   /* Light theme (default) */
@@ -210,6 +210,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --pagination-link-hover-bg: #d3dfee;
     --pagination-link-active-bg: #fff;
     --pagination-link-active-border-color: #000;
+    --tag-color:#1b1928;
   }
 
   /* Dark theme */
@@ -238,6 +239,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --pagination-link-hover-bg: #374151;
     --pagination-link-active-bg: #374151;
     --pagination-link-active-border-color: #f7fafc;
+    --tag-color:#f7fafc;
   }
 
   * {
