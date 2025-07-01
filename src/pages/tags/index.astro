@@ -44,13 +44,17 @@ const sortedTags = Array.from(tagCounts.entries())
       </div>
       
       <div class="back-link">
-        <a href="/" class="view-all-link">Back to home</a>
+        <a href="/" class="view-all-link">Latest posts</a>
       </div>
     </section>
   </div>
 </Layout>
 
 <style>
+  body {
+    font-family: 'Montserrat Variable', sans-serif;
+  }
+
   .container {
     max-width: 800px;
     margin: 0 auto;
@@ -83,17 +87,21 @@ const sortedTags = Array.from(tagCounts.entries())
   }
 
   .tag-card {
-    background-color: var(--post-card-bg);
-    border-radius: 15px;
-    padding: 1.5rem;
+    color: var(--tag-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-variation-settings: "wght" 500;
     text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--nav-link-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
   }
 
   .tag-card:hover {
-    background-color: var(--post-card-hover-bg);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .tag-card h3 {
@@ -109,7 +117,6 @@ const sortedTags = Array.from(tagCounts.entries())
 
   .back-link {
     margin-top: 2rem;
-    text-align: center;
   }
 
   .view-all-link {
