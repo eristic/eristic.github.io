@@ -188,21 +188,21 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
   [data-theme="light"] {
     --text-color: #2c3e50;
     --background-color: #5b7c99;
-    --accent-color: #3498db;
+    --accent-color: rgba(255, 255, 255, 0.4);
     --nav-text-color: #DFECFF;
     --nav-link-bg: rgba(255, 255, 255, 0.15);
     --nav-link-hover-bg: rgba(255, 255, 255, 0.25);
     --nav-link-active-bg: rgba(255, 255, 255, 0.3);
     --hero-bg-color: #e3dfdf;
     --hero-border-color: #000;
-    --post-card-bg: linear-gradient(90deg, rgba(241, 241, 242, 1) 0%, rgba(91, 124, 153, 1) 100%);
-    --post-card-hover-bg: #e3dfdf;
+    --post-card-bg: #e3dfdf;
+    --post-card-hover-bg: #eeeaea;
     --post-title-color: #1b1928;
     --post-description-color: #1b1928;
     --post-meta-color: #1b1928;
     --section-heading-color: #020202;
     --view-all-color: #DFECFF;
-    --blog-post-bg: #fafafa;
+    --blog-post-bg: #f0f0f0;
     --bg-color: #ffffff;
     --pagination-separator-color: rgba(255, 255, 255, 0.4);
     --footer-text-color: rgba(255, 255, 255, 0.7);
@@ -211,13 +211,14 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --pagination-link-active-bg: #fff;
     --pagination-link-active-border-color: #000;
     --tag-color:#1b1928;
+    --link-color: #0256a0
   }
 
   /* Dark theme */
   [data-theme="dark"] {
     --text-color: #e2e8f0;
     --background-color: #1a202c;
-    --accent-color: #60a5fa;
+    --accent-color: rgba(203, 213, 224, 0.4);
     --nav-text-color: #cbd5e0;
     --nav-link-bg: rgba(255, 255, 255, 0.1);
     --nav-link-hover-bg: rgba(255, 255, 255, 0.15);
@@ -225,7 +226,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --footer-text-color: #a0aec0;
     --hero-bg-color: #2d3748;
     --hero-border-color: #4a5568;
-    --post-card-bg: linear-gradient(90deg, rgba(45, 55, 72, 1) 0%, rgba(26, 32, 44, 1) 100%);
+    --post-card-bg: rgba(45, 55, 72, 1);
     --post-card-hover-bg: #374151;
     --post-title-color: #f7fafc;
     --post-description-color: #e2e8f0;
@@ -241,6 +242,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --pagination-link-active-bg: #374151;
     --pagination-link-active-border-color: #f7fafc;
     --tag-color:#f7fafc;
+    --link-color: #8ab6ff;
   }
 
   * {

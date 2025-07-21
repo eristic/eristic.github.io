@@ -157,7 +157,6 @@ try {
   .hero {
     background-color: var(--hero-bg-color);
     border-bottom: 5px solid var(--hero-border-color);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
     padding: 3rem 0;
   }
 
@@ -170,7 +169,6 @@ try {
   .hero h1 {
     margin: 0 0 1rem 0;
     color: var(--post-title-color);
-    transition: color 0.3s ease;
     font-size: 2.5rem;
     line-height: 1.2;
   }
@@ -181,7 +179,6 @@ try {
     margin: 0 0 1.5rem 0;
     line-height: 1.5;
     opacity: 0.9;
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 400;
     font-variation-settings: 'wght' 400;
@@ -194,7 +191,6 @@ try {
     gap: 1rem;
     font-size: 0.9rem;
     color: var(--post-meta-color);
-    transition: color 0.3s ease;
   }
 
   .hero-date {
@@ -229,15 +225,13 @@ try {
   .blog-post {
     margin: 0 auto;
     padding: 1rem 4rem;
-    background-color: var(--blog-post-bg);
-    transition: background-color 0.3s ease;
+    background-color: var(--blog-post-bg);  
   }
 
   .content {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--post-description-color);
-    transition: color 0.3s ease;
   }
 
   /* Headings (H1-H6) */
@@ -245,7 +239,6 @@ try {
     font-size: 2.5rem;
     margin: 2.5rem 0 1.5rem;
     color: var(--post-title-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
     font-variation-settings: 'wght' 900;
@@ -256,7 +249,6 @@ try {
     font-size: 2rem;
     margin: 2rem 0 1rem;
     color: var(--section-heading-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
     font-variation-settings: 'wght' 900;
@@ -266,7 +258,6 @@ try {
     font-size: 1.6rem;
     margin: 1.8rem 0 0.8rem;
     color: var(--section-heading-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
     font-variation-settings: 'wght' 700;
@@ -276,7 +267,6 @@ try {
     font-size: 1.4rem;
     margin: 1.6rem 0 0.6rem;
     color: var(--section-heading-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
     font-variation-settings: 'wght' 700;
@@ -286,7 +276,6 @@ try {
     font-size: 1.2rem;
     margin: 1.4rem 0 0.4rem;
     color: var(--section-heading-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
     font-variation-settings: 'wght' 700;
@@ -296,7 +285,6 @@ try {
     font-size: 1rem;
     margin: 1.2rem 0 0.2rem;
     color: var(--section-heading-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
     font-variation-settings: 'wght' 700;
@@ -306,7 +294,6 @@ try {
   .content :global(p) {
     margin-bottom: 1.5rem;
     color: var(--post-description-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 400;
     font-variation-settings: 'wght' 500;
@@ -318,7 +305,6 @@ try {
     font-weight: 900;
     font-variation-settings: 'wght' 900;
     color: var(--post-title-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -326,7 +312,6 @@ try {
   .content :global(i) {
     font-style: italic;
     color: var(--post-meta-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -335,7 +320,6 @@ try {
   .content :global(s) {
     text-decoration: line-through;
     color: var(--post-meta-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -345,7 +329,6 @@ try {
     color: var(--bg-color);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -364,9 +347,8 @@ try {
 
   /* Links */
   .content :global(a) {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
+    color: var(--link-color);
+    text-decoration: none;    
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 400;
     font-variation-settings: 'wght' 500;
@@ -392,7 +374,6 @@ try {
     margin: 2rem 0;
     font-style: italic;
     color: var(--post-meta-color);
-    transition: color 0.3s ease, border-color 0.3s ease;
     background-color: var(--post-card-bg);
     padding: 1rem 1rem 1rem 2rem;
     border-radius: 8px;
@@ -410,7 +391,6 @@ try {
     margin: 1.5rem 0;
     padding-left: 2rem;
     color: var(--post-description-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -457,7 +437,6 @@ try {
     font-variation-settings: 'wght' 900;
     color: var(--post-title-color);
     margin-top: 1rem;
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -465,7 +444,6 @@ try {
     margin-left: 2rem;
     margin-bottom: 0.5rem;
     color: var(--post-description-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -476,7 +454,6 @@ try {
     border-radius: 4px;
     font-size: 0.9em;
     font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
-    transition: background-color 0.3s ease;
     color: var(--post-title-color);
   }
 
@@ -487,7 +464,6 @@ try {
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
-    transition: background-color 0.3s ease;
     border: 1px solid var(--post-card-bg);
   }
 
@@ -506,7 +482,6 @@ try {
     background-color: var(--post-card-bg);
     border-radius: 8px;
     overflow: hidden;
-    transition: background-color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -515,7 +490,6 @@ try {
     padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--post-card-hover-bg);
-    transition: border-color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -524,19 +498,12 @@ try {
     font-weight: 900;
     font-variation-settings: 'wght' 900;
     color: var(--post-title-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
   .content :global(td) {
     color: var(--post-description-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
-  }
-
-  .content :global(tr:hover) {
-    background-color: var(--post-card-hover-bg);
-    transition: background-color 0.3s ease;
   }
 
   /* Horizontal Rules */
@@ -546,7 +513,6 @@ try {
     background-color: var(--accent-color);
     margin: 3rem 0;
     border-radius: 1px;
-    transition: background-color 0.3s ease;
   }
 
   /* Footnotes */
@@ -555,7 +521,6 @@ try {
     vertical-align: super;
     color: var(--accent-color);
     text-decoration: none;
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -568,7 +533,6 @@ try {
     padding-top: 2rem;
     border-top: 1px solid var(--post-card-hover-bg);
     font-size: 0.9em;
-    transition: border-color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
@@ -579,7 +543,6 @@ try {
 
   .content :global(.footnotes li) {
     color: var(--post-meta-color);
-    transition: color 0.3s ease;
     font-family: 'Montserrat Variable', sans-serif;
   }
 
