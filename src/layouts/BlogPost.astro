@@ -90,7 +90,7 @@ try {
     </div>
   </section>
 
-  <div class="container">
+  <div class="container container-blog-post">
     <article class="blog-post">
       <div class="content">
         <slot />
@@ -100,19 +100,6 @@ try {
 </Layout>
 
 <style>
-  /* Base styles matching index.astro */
-  @property --myColor1 {
-    syntax: '<color>';
-    initial-value: rgba(241, 241, 242, 1);
-    inherits: false;
-  }
-
-  @property --myColor2 {
-    syntax: '<color>';
-    initial-value: rgba(91, 124, 153, 1);
-    inherits: false;
-  }
-
   /* Font family definitions matching index.astro */
   h1, h2, h3, h4, h5, h6, time {
     font-family: 'Montserrat Variable', sans-serif;
@@ -124,6 +111,10 @@ try {
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 400;
     font-variation-settings: 'wght' 500;
+  }
+
+  .container-blog-post {
+    background-color: var(--blog-post-bg);
   }
 
   /* Add tag styles */
@@ -224,6 +215,7 @@ try {
 
   .blog-post {
     margin: 0 auto;
+    max-width: 65ch;
     padding: 1rem 4rem;
     background-color: var(--blog-post-bg);  
   }
@@ -554,15 +546,7 @@ try {
   /* Responsive design */
   @media (max-width: 768px) {
     .hero {
-      padding: 2rem 0;
-    }
-
-    .hero h1 {
-      font-size: 2rem;
-    }
-
-    .hero-description {
-      font-size: 1.1rem;
+      padding: 2rem;
     }
 
     .hero-meta {
@@ -576,9 +560,7 @@ try {
     }
 
     .blog-post {
-      padding: 1.5rem 0.75rem;
-      margin: 0 0.5rem;
-      border-radius: 8px;
+      padding: 2rem;
     }
 
     .content :global(h1) {

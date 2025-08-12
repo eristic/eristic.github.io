@@ -1,0 +1,43 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import type { MarkdownInstance } from 'astro';
+
+interface PostFrontmatter {
+  title: string;
+  pubDate: string;
+  author?: string;
+  description?: string;
+  tags?: string[];
+}
+
+type Post = MarkdownInstance<PostFrontmatter>;
+
+export async function getStaticPaths() {
+  // Get all markdown files from year-based directories
+  const allPosts: Post[] = await Astro.glob('../posts/**/*.md');
+  
+  return allPosts
+    .filter(post => {
+      // Only include posts that are in year-based directories
+      const urlParts = post.url?.split('/') || [];
+      return urlParts.length >= 3 && /^\d{4}$/.test(urlParts[urlParts.length - 2]);
+    })
+    .map(post => {
+      const urlParts = post.url?.split('/') || [];
+      const year = urlParts[urlParts.length - 2];
+      const slug = urlParts[urlParts.length - 1];
+      
+      return {
+        params: { year, slug },
+        props: { post }
+      };
+    });
+}
+
+const { post } = Astro.props;
+const { Content } = post;
+---
+
+<BlogPost frontmatter={post.frontmatter}>
+  <Content />
+</BlogPost>

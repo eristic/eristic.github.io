@@ -49,11 +49,11 @@ const hasNextPage: boolean = currentPage < totalPages;
 const hasPrevPage: boolean = currentPage > 1;
 
 // Function to generate pagination numbers with ellipsis
-function generatePaginationNumbers(current: number, total: number) {
+function generatePaginationNumbers(current: number, total: number): (number | string)[] {
   const delta = 1; // Number of pages to show before and after current page
-  const range = [];
-  const rangeWithDots = [];
-  let l;
+  const range: number[] = [];
+  const rangeWithDots: (number | string)[] = [];
+  let l: number | undefined;
 
   // Always include page 1
   range.push(1);
@@ -70,7 +70,7 @@ function generatePaginationNumbers(current: number, total: number) {
 
   // Add ellipsis where needed
   for (const i of range) {
-    if (l) {
+    if (l !== undefined) {
       if (i - l === 2) {
         // If there's only one page gap, just show that page instead of dots
         rangeWithDots.push(l + 1);
@@ -146,7 +146,7 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
           
           <div class="pagination-controls">
             {hasPrevPage && (
-              <a href={currentPage === 2 ? '/post/' : `/post/${currentPage - 1}`} class="pagination-link prev">
+              <a href={currentPage === 2 ? '/posts/' : `/posts/${currentPage - 1}`} class="pagination-link prev">
                 ← Previous
               </a>
             )}
@@ -156,7 +156,7 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
                 pageNum === '...' 
                   ? <span class="pagination-ellipsis">…</span>
                   : <a 
-                      href={pageNum === 1 ? '/post/' : `/post/${pageNum}`}
+                      href={pageNum === 1 ? '/posts/' : `/posts/${pageNum}`}
                       class={`pagination-link ${pageNum === currentPage ? 'active' : ''}`}
                       aria-current={pageNum === currentPage ? 'page' : undefined}
                     >
@@ -166,7 +166,7 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
             </div>
             
             {hasNextPage && (
-              <a href={`/post/${currentPage + 1}`} class="pagination-link next">
+              <a href={`/posts/${currentPage + 1}`} class="pagination-link next">
                 Next →
               </a>
             )}

@@ -18,7 +18,7 @@ interface TagStaticPath {
 }
 
 export async function getStaticPaths(): Promise<TagStaticPath[]> {
-  const posts = await Astro.glob<PostFrontmatter>('../post/*.md');
+  const posts = await Astro.glob<PostFrontmatter>('../posts/**/*.md');
   
   // Get all unique tags
   const allTags = new Set<string>();

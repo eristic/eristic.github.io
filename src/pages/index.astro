@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Get all blog posts and sort them by date
-const posts = await Astro.glob('./post/*.md');
-const sortedPosts = posts.sort((a, b) => 
+// Get all blog posts from both root and year-based directories
+const allPosts = await Astro.glob('./posts/**/*.md');
+
+const sortedPosts = allPosts.sort((a, b) => 
 	new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
 );
 // Get the latest 3 posts
@@ -56,7 +57,7 @@ const latestPosts = sortedPosts.slice(0, 3);
 			))}
 		</div>
 		<div class="view-all">
-			<a href="/post" class="view-all-link">View all posts</a>
+			<a href="/posts" class="view-all-link">View all posts</a>
 		</div>
 	</section>
 </div>
