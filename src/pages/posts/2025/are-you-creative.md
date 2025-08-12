@@ -23,7 +23,7 @@ I'm not opposed to you thinking you were creative as a child and getting into yo
 
 What I'd like for us to get past early is creativity is not something you lose. It is in every act you make.
 
-Conversation, for example, is original. Each interuption. Each exclamation! Created without much thought or editorship. What ever you do contains momemnts of spontaneity. Your enjoyment or reaction to a piece of media creates a momentary spark in you (whether this is a Chit Tiktok or a Citizen Kane).
+Conversation, for example, is original. Each interuption. Each exclamation! Created without much thought or editorship. What ever you do contains momemnts of spontaneity. Your enjoyment or reaction to a piece of media creates a momentary spark in you (whether this is watching Tiktok or Citizen Kane).
 
 Being creative does not have to involve creating capital A art. Freeing yourself from the construct will lead to less pressure when you are creative. Because there isn't a category and everything is creative, creativity can simply mean enriching your life. That becomes the how and the why.
 

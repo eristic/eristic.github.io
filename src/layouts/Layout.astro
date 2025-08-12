@@ -69,7 +69,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
         if (!themeToggle) return;
 
         // Update toggle button state
-        function updateToggleButton(theme: string) {
+        function updateToggleButton(theme: string, updateTooltip: boolean = true) {
           const lightIcon = themeToggle!.querySelector('.light-icon');
           const darkIcon = themeToggle!.querySelector('.dark-icon');
           const tooltip = themeToggle!.querySelector('.tooltip') as HTMLElement;
@@ -78,11 +78,15 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
             if (theme === 'dark') {
               (lightIcon as HTMLElement).style.opacity = '0';
               (darkIcon as HTMLElement).style.opacity = '1';
-              tooltip.textContent = 'Clap on';
+              if (updateTooltip) {
+                tooltip.textContent = 'Clap on';
+              }
             } else {
               (lightIcon as HTMLElement).style.opacity = '1';
               (darkIcon as HTMLElement).style.opacity = '0';
-              tooltip.textContent = 'Clap off';
+              if (updateTooltip) {
+                tooltip.textContent = 'Clap off';
+              }
             }
           }
         }
@@ -92,20 +96,27 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
           const currentTheme = html.getAttribute('data-theme');
           const newTheme = currentTheme === 'light' ? 'dark' : 'light';
           
-          // Update DOM and localStorage
-          html.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          // Update button state and hide tooltip
-          updateToggleButton(newTheme);
-          
-          // Hide tooltip after clicking
+          // Hide tooltip immediately to prevent flash
           const tooltip = themeToggle!.querySelector('.tooltip') as HTMLElement;
           if (tooltip) {
             tooltip.style.opacity = '0';
             tooltip.style.visibility = 'hidden';
             tooltip.style.transform = 'translateX(-50%)';
           }
+          
+          // Update DOM and localStorage
+          html.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          // Update button state (icons only, not tooltip text yet)
+          updateToggleButton(newTheme, false);
+          
+          // Update tooltip text after a brief delay to ensure it stays hidden
+          setTimeout(() => {
+            if (tooltip) {
+              tooltip.textContent = newTheme === 'dark' ? 'Clap on' : 'Clap off';
+            }
+          }, 100);
           
           // Dispatch custom event for other components that might need to know
           window.dispatchEvent(new CustomEvent('themeChanged', { 
