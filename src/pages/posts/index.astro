@@ -21,9 +21,9 @@ function generatePaginationNumbers(current: number, total: number) {
   
   // Original logic for page 1 and last page
   const delta = 1; // Number of pages to show before and after current page
-  const range = [];
-  const rangeWithDots = [];
-  let l;
+  const range: number[] = [];
+  const rangeWithDots: (number | string)[] = [];
+  let l: number | undefined;
 
   // Always include page 1
   range.push(1);
@@ -40,7 +40,7 @@ function generatePaginationNumbers(current: number, total: number) {
 
   // Add ellipsis where needed
   for (const i of range) {
-    if (l) {
+    if (l !== undefined) {
       if (i - l === 2) {
         // If there's only one page gap, just show that page instead of dots
         rangeWithDots.push(l + 1);

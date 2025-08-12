@@ -27,4 +27,4 @@ Conversation, for example, is original. Each interuption. Each exclamation! Crea
 
 Being creative does not have to involve creating capital A art. Freeing yourself from the construct will lead to less pressure when you are creative. Because there isn't a category and everything is creative, creativity can simply mean enriching your life. That becomes the how and the why.
 
-Let go of preconceptions, labels, what is and what is not. And just be.
+Let go of preconceptions, labels, what is and what is not. And just be. Be creative. B-E-C-R-E-A-T-I-V-E. Be creative.
