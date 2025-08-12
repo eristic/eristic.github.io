@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 
 // Get all posts
-const posts = await Astro.glob('../post/*.md');
+const posts = await Astro.glob('../posts/**/*.md');
 
 // Extract all unique tags and count posts for each tag
 const tagCounts = new Map<string, number>();
@@ -24,7 +24,7 @@ const sortedTags = Array.from(tagCounts.entries())
   }));
 ---
 
-<Layout title="Tags | Scott's Thoughts" description="Browse posts by tag">
+<Layout title="Tags | Start Start" description="Browse posts by tag">
   <section class="hero">
     <div class="container">
       <h1>Browse by Tag</h1>
@@ -94,7 +94,7 @@ const sortedTags = Array.from(tagCounts.entries())
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    background-color: var(--nav-link-bg);
+    background-color: var(--blog-post-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     letter-spacing: 0.5px;

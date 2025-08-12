@@ -19,7 +19,7 @@ interface TagStaticPath {
 
 export async function getStaticPaths(): Promise<TagStaticPath[]> {
   const posts = await Astro.glob<PostFrontmatter>('../posts/**/*.md');
-  
+
   // Get all unique tags
   const allTags = new Set<string>();
   posts.forEach((post: Post) => {
@@ -50,7 +50,7 @@ const { posts, tag } = Astro.props;
 const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 ---
 
-<Layout title={`${capitalizedTag} | Tag | Scott's Thoughts`} description={`Posts tagged with ${tag}`}>
+<Layout title={`${capitalizedTag} | Tag | Start Start`} description={`Posts tagged with ${tag}`}>
   <section class="hero">
     <div class="container">
       <h1>Posts tagged with "{capitalizedTag}"</h1>
