@@ -1,7 +1,7 @@
 ---
 layout: ../../../layouts/BlogPost.astro
 title: "Are You Creative? Yes. Yes you are."
-description: "Uncovering that you are creative, even if you don't think you are."
+description: "Uncover that you are creative, even if you don't think you are."
 pubDate: 2025-08-11
 author: "Scott Stewart"
 tags: [Creativity]
@@ -22,6 +22,8 @@ We'll explore point 2 and 3 in much greater detail when we unearth the lies that
 I'm not opposed to you thinking you were creative as a child and getting into your inner-child to create, if that's working for you.
 
 What I'd like for us to get past early is creativity is not something you lose. It is in every act you make.
+
+> Creativity is not something you lose. It is in every act you make.
 
 I was told early on in my life that I wasn't a writer because I haven't published anything. By that construct, I didn't have worth as a creative entity. Instead, I focused on getting published. But getting published is not how you should be valued. Creativity is much, much more than that.
 
