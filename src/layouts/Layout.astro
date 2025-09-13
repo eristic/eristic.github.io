@@ -39,7 +39,10 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
         <slot />
       </main>
       <footer>
+      
         <p>&copy; {new Date().getFullYear()} Scott Stewart. All rights reserved.</p>
+
+        <!-- <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="bUoLGrd1dw" data-color="#5e65c5" data-emoji="☕"  data-font="Poppins" data-text="Buy me a coffee" data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
       </footer>
     </div>
 
@@ -252,7 +255,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     --pagination-link-hover-bg: #374151;
     --pagination-link-active-bg: #374151;
     --pagination-link-active-border-color: #f7fafc;
-    --tag-color:#f7fafc;
+    --tag-color: #f7fafc;
     --link-color: #8ab6ff;
   }
 

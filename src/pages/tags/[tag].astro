@@ -62,10 +62,12 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
     <section class="featured">
       <div class="post-grid">
         {posts.map((post: Post) => (
-          <a href={post.url} class="post-card">
+          <article class="post-card">
             <div class="post-card-content">
               <h3>
-                {post.frontmatter.title}
+                <a href={post.url} class="post-title-link">
+                  {post.frontmatter.title}
+                </a>
               </h3>
               <div class="post-metadata">
                 {post.frontmatter.pubDate && (
@@ -92,7 +94,7 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
                 </div>
               )}
             </div>
-          </a>
+          </article>
         ))}
       </div>
       
@@ -104,6 +106,18 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 </Layout>
 
 <style>
+  h1, h2, h3, h4, h5, h6, time {
+    font-family: 'Montserrat Variable', sans-serif;
+    font-weight: 900;
+    font-variation-settings: 'wght' 900;
+  }
+
+  p, time, a {
+    font-family: 'Montserrat Variable', sans-serif;
+    font-weight: 400;
+    font-variation-settings: 'wght' 500;
+  }
+
   .container {
     max-width: 800px;
     margin: 0 auto;
@@ -128,11 +142,22 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
     line-height: 1.7;
   }
 
+
+
   h3 {
     margin-bottom: 0;
     margin-top: 0;
-    color: var(--post-title-color);
     font-size: 1.5rem;
+  }
+
+  .post-title-link {
+    color: var(--post-title-color);
+    text-decoration: none;
+  }
+
+  .post-title-link:hover {
+    color: var(--post-title-color);
+    text-decoration: underline;
   }
 
   .post-card {
@@ -141,19 +166,23 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
     margin-bottom: 2rem;
     background: var(--post-card-bg);
     border-radius: 15px;
-    text-decoration: none;
-    transition: background 0.3s ease, transform 0.2s ease;
   }
 
   .post-card:hover {
     background: var(--post-card-hover-bg);
-    transform: translateY(-3px);
   }
 
   .post-metadata {
     margin-bottom: 0.5rem;
     color: var(--post-meta-color);
     font-size: 0.9rem;
+  }
+
+  .post-metadata .author {
+    color: var(--post-meta-color);
+    font-family: 'Montserrat Variable', sans-serif;
+    font-style: italic;
+    margin-left: 1rem;
   }
 
   .description {
@@ -170,24 +199,20 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
   }
 
   .tag {
-    background-color: var(--tag-bg-color, #e9ecef);
-    color: var(--tag-text-color, #495057);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    color: var(--tag-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-variation-settings: "wght" 500;
     text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: 600;
-    font-variation-settings: 'wght' 600;
-  }
-
-  .tag:hover {
-    background-color: var(--tag-hover-bg-color, #ced4da);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--nav-link-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
   }
 
   .back-link {
     margin-top: 2rem;
-    text-align: center;
   }
 
   .view-all-link {

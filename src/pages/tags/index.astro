@@ -61,6 +61,18 @@ const sortedTags = Array.from(tagCounts.entries())
     padding: 0 1rem;
   }
 
+  h1, h2, h3, h4, h5, h6, time {
+    font-family: 'Montserrat Variable', sans-serif;
+    font-weight: 900;
+    font-variation-settings: 'wght' 900;
+  }
+
+  p, time, a {
+    font-family: 'Montserrat Variable', sans-serif;
+    font-weight: 400;
+    font-variation-settings: 'wght' 400;
+  }
+
   .hero {
     background-color: var(--hero-bg-color);
     border-bottom: 5px solid var(--hero-border-color);
@@ -87,7 +99,7 @@ const sortedTags = Array.from(tagCounts.entries())
   }
 
   .tag-card {
-    color: var(--tag-color);
+    color: var(--nav-text-color);
     font-size: 0.9rem;
     font-weight: 500;
     font-variation-settings: "wght" 500;
@@ -106,8 +118,11 @@ const sortedTags = Array.from(tagCounts.entries())
 
   .tag-card h3 {
     margin: 0 0 0.5rem 0;
-    color: var(--post-title-color);
     font-size: 1.5rem;
+  }
+
+  .tag-card span {
+    color: var(--nav-text-color);
   }
 
   .post-count {
