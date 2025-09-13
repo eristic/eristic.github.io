@@ -1,8 +1,8 @@
 ---
 layout: ../../../layouts/BlogPost.astro
 title: "Are You Creative? Yes. Yes you are."
-description: "Uncover that you are creative, even if you don't think you are."
-pubDate: 2025-08-11
+description: "Discover that you are creative, even if you don't think you are."
+pubDate: 2025-09-13
 author: "Scott Stewart"
 tags: [Creativity]
 ---

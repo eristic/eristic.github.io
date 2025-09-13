@@ -138,18 +138,6 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
     padding: 0 1rem;
   }
 
-  @property --myColor1 {
-    syntax: '<color>';
-    initial-value: rgba(241, 241, 242, 1);
-    inherits: false;
-  }
-
-  @property --myColor2 {
-    syntax: '<color>';
-    initial-value: rgba(91, 124, 153, 1);
-    inherits: false;
-  }
-
   h1, h2, h3, h4, h5, h6, time {
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
@@ -228,7 +216,7 @@ const paginationNumbers = generatePaginationNumbers(1, totalPages);
     position: relative;
     background: var(--post-card-bg);
     border-radius: 15px;
-    transition: background 2s ease, border-radius 2s, --myColor1 1s, --myColor2 1s;
+    transition: border-radius 2s;
     text-decoration: none;
     color: inherit;
   }
