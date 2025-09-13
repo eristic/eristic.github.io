@@ -1,13 +1,12 @@
 ---
 import '@fontsource-variable/montserrat';
-import '@fontsource-variable/merriweather';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "A minimal and elegant blog" } = Astro.props;
+const { title, description = "A blog about technology and creativity" } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -296,8 +295,7 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
   nav a {
     color: var(--nav-text-color);
     font-size: 1rem;
-    font-weight: 900;
-    font-variation-settings: 'wght' 900;
+    font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
   }
@@ -431,20 +429,13 @@ const { title, description = "A minimal and elegant blog" } = Astro.props;
     transition: color 0.3s ease;
   }
 
-  nav a {
-    font-weight: 700;
-    font-variation-settings: 'wght' 700;
-  }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 900;
-    font-variation-settings: 'wght' 900;
   }
 
   p, a {
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 400;
-    font-variation-settings: 'wght' 400;
   }
 </style> 
