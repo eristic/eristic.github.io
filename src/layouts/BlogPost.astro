@@ -33,7 +33,14 @@ const dateObject = rawPubDate instanceof Date
     : new Date();
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  author={author}
+  pubDate={rawPubDate}
+  tags={tags}
+  type="article"
+>
   <section class="hero">
     <div class="container">
       <div class="hero-content">
