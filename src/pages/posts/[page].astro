@@ -214,15 +214,17 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
     }
   
     .hero h1 {
-      margin: 0;
-      color: var(--post-title-color);
-    }
-  
-    .hero p {
-      margin: 0;
-      color: var(--post-description-color);
-      line-height: 1.7;
-    }
+    margin: 0;
+    color: var(--post-title-color);
+    padding-top: 1rem;
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--post-description-color);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
 
     .tag {
       color: var(--tag-color);
@@ -335,7 +337,6 @@ const paginationNumbers = generatePaginationNumbers(currentPage, totalPages);
     .page-indicator {
       font-weight: 600;
       color: var(--footer-text-color);
-      transition: color 0.3s ease;
     }
   
     .posts-indicator {
