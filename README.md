@@ -1,3 +1,3 @@
-# Blog - @ sstew.art Scott Stewart
+# Blog - @ startst.art
 
 `npm run dev` to build locally
