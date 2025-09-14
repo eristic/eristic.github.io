@@ -50,13 +50,13 @@ const imageUrl = new URL(image, siteUrl).toString();
     {tags && tags.map(tag => <meta property="article:tag" content={tag} />)}
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={imageUrl} />
-    <meta property="twitter:creator" content="@scottst_w_rt" />
-    <meta property="twitter:site" content="@scottst_w_rt" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:creator" content="@scottst_w_rt" />
+    <meta name="twitter:site" content="@scottst_w_rt" />
     
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
