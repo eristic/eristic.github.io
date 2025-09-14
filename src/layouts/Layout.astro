@@ -23,9 +23,9 @@ const { title, description = "A blog about technology and creativity" } = Astro.
       <header>
         <div class="container">
           <nav>
-            <a href="/" class="nav-link">Latest posts</a>
-            <a href="/posts" class="nav-link">All posts</a>
-            <a href="/tags" class="nav-link">Browse by tag</a>
+            <a href="/" class="nav-link">Latest</a>
+            <a href="/posts" class="nav-link">All</a>
+            <a href="/tags" class="nav-link">Tags</a>
           </nav>
           <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
             <span class="light-icon">👏</span>
@@ -279,7 +279,6 @@ const { title, description = "A blog about technology and creativity" } = Astro.
     margin: 0 auto;
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
   }
 
@@ -438,23 +437,4 @@ const { title, description = "A blog about technology and creativity" } = Astro.
     font-family: 'Montserrat Variable', sans-serif;
     font-weight: 400;
   }
-
-  /* @media (max-width: 600px) {
-    nav {
-      font-size: 0.8rem;
-    }
-  }
-
-  @media (max-width: 380px) {
-    header {
-      margin-bottom: 0;
-      .container {
-        flex-direction: column;
-        align-items: flex-start;
-        nav {
-          margin-bottom: 1rem;
-        }
-      }
-    }
-  } */
 </style> 
