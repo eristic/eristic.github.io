@@ -25,44 +25,12 @@ const author = frontmatter?.author || Astro.props.author || "Scott Stewart";
 const tags = frontmatter?.tags || Astro.props.tags || [];
 const rawPubDate = frontmatter?.pubDate || Astro.props.pubDate;
 
-// Convert pubDate to Date object if it's a string, with better error handling
-let dateObject: Date | null = null;
-try {
-  console.log('Raw pubDate:', rawPubDate, 'Type:', typeof rawPubDate);
-  
-  if (rawPubDate instanceof Date) {
-    dateObject = rawPubDate;
-  } else if (typeof rawPubDate === 'string') {
-   // Try multiple date parsing approaches
-   let parsedDate: Date | null = null;
-    
-    // Try YYYY-MM-DD format
-    if (/^\d{4}-\d{2}-\d{2}$/.test(rawPubDate)) {
-      parsedDate = new Date(rawPubDate + 'T00:00:00');
-    }
-    
-    // Try direct parsing
-    if (!parsedDate || isNaN(parsedDate.getTime())) {
-      parsedDate = new Date(rawPubDate);
-    }
-    
-    // Try parsing with explicit timezone
-    if (!parsedDate || isNaN(parsedDate.getTime())) {
-      parsedDate = new Date(rawPubDate + 'T00:00:00Z');
-    }
-    
-    if (parsedDate && !isNaN(parsedDate.getTime())) {
-      dateObject = parsedDate;
-      console.log('Successfully parsed date:', dateObject);
-    } else {
-      console.log('Failed to parse date, using current date');
-      dateObject = new Date();
-    }
-  }
-} catch (error) {
-  console.log('Date parsing error:', error);
-  dateObject = new Date();
-}
+// Convert pubDate to Date object
+const dateObject = rawPubDate instanceof Date 
+  ? rawPubDate 
+  : rawPubDate 
+    ? new Date(rawPubDate) 
+    : new Date();
 ---
 
 <Layout title={title} description={description}>
