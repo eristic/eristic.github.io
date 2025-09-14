@@ -18,6 +18,15 @@ const { title, description = "A blog about technology and creativity" } = Astro.
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZD6YVBT0CJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZD6YVBT0CJ');
+  </script>
   <body>
     <div class="site-wrapper">
       <header>
@@ -39,7 +48,7 @@ const { title, description = "A blog about technology and creativity" } = Astro.
       </main>
       <footer>
       
-        <p>&copy; {new Date().getFullYear()} Scott Stewart. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} <a href="https://sstew.art">Scott Stewart</a>. All rights reserved.</p>
       </footer>
     </div>
 
@@ -422,6 +431,10 @@ const { title, description = "A blog about technology and creativity" } = Astro.
     color: var(--footer-text-color);
     font-size: 0.9rem;
     padding: 2rem 0;
+  }
+
+  footer a {
+    color: var(--footer-text-color);
   }
 
   h1, h2, h3, h4, h5, h6 {
