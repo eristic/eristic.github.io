@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogPost.astro
 title: "I am an Imposter, Just Like Everyone Else"
 description: "Let's talk about Imposter Syndrome"
-pubDate: 2025-09-30
+pubDate: 2025-09-29
 author: "Scott Stewart"
 tags: [Creativity, Tech]
 ---
