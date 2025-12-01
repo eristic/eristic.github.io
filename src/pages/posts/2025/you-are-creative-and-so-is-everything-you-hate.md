@@ -29,7 +29,7 @@ If everyone who is creative stops being creative out of anger at generative AI, 
 
 > You have to be more creative with how you are creative
 
-When I was in the Peace Corps in Northern Macedonia, I experienced culture shock and felt a sense of alienation. I wasn’t feeling very creative at all. I mentioned this to a friend in a nearby town. She said the most important eleven words to me: "You have to be more creative with how you are creative." We have to be more creative with how we are creative.
+When I was in the Peace Corps in North Macedonia, I experienced culture shock and felt a sense of alienation. I wasn’t feeling very creative at all. I mentioned this to a friend in a nearby town. She said the most important eleven words to me: "You have to be more creative with how you are creative." We have to be more creative with how we are creative.
 
 How is this done? This is one of those "easier said than done" things. I hope that through this blog, I can slowly unravel the concept with you. I will draw on my experience as both a traditional creative person and a creative professional in a corporate landscape.
 
